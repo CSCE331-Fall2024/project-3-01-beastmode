@@ -1,9 +1,9 @@
 import React from 'react';
-import '../../../styles/kiosk.css';
+import '../../../styles/menu.css';
 
 const MenuBoardHowTo = ({name, image, calories, description, price}) => {
     return (
-        <div className='card g-3'>
+        <div className='card my-2'>
             <div className="row">
                 <div className="col">
                     {image}

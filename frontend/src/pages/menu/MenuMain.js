@@ -30,10 +30,10 @@ function MenuMain() {
   }, []);
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid" /*style={{ width: "1400px"}}*/>
         <div className="row">
           <div className="col-5">
-            <div className="row">
+            <div className="row" style={{ backgroundColor: "#A3080C"}}>
               <h1>Pick Your Meal</h1>
             </div>
             <div className="row">
@@ -54,24 +54,27 @@ function MenuMain() {
             </div>
           </div>
           <div className="col-7">
-            <div className="row">
-              <MenuBoardSide name={"Super Greens"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"130 cal"}/>
+            <div className="row" style={{ backgroundColor: "#A3080C"}}>
+              <h1>Sides</h1>
             </div>
+            {/* <div className="row">
+              <MenuBoardSide name={"Super Greens"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"130 cal"}/>
+            </div> */}
             <div className="row">
               <div className="col">
-                <h1>Super Greens</h1>
+                <MenuBoardSide name={"Super Greens"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"130 cal"}/>
               </div>
               <div className="col">
-                <h1>Chow Mein</h1>
+                <MenuBoardSide name={"Chow Mein"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"600 cal"}/>
               </div>
             </div>
 
             <div className="row">
               <div className="col">
-                <h1>Fried Rice</h1>
+                <MenuBoardSide name={"Fried Rice"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"620 cal"}/>
               </div>
               <div className="col">
-                <h1>White Steamed Rice</h1>
+                <MenuBoardSide name={"White Steamed Rice"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"520 cal"}/>
               </div>
             </div>
 
