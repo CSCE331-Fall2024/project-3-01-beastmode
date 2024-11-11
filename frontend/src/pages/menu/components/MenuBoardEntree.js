@@ -5,13 +5,17 @@ const MenuBoardEntree = ({name, image, calories, icons}) => {
     return (
         <div className='card my-2'>
             <div className="row">
-                {name}
+                <div className='card-body'>
+                    <h2 className='card-title card-entree'>
+                        {name}
+                    </h2>
+                    <p className='card-text card-entree'>
+                        {calories}
+                    </p>
+                </div>
             </div>
             <div className="row">
-                {calories}
-            </div>
-            <div className="row">
-                <div className='col-10'>
+                <div className='col-10 entree-image'>
                     {image}
                 </div>
                 <div className='col'>

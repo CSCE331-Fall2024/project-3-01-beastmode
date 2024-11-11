@@ -10,6 +10,17 @@ img {
     float: right;
 }
 
+.entree-image {
+    width: 80%;
+    float: left;
+}
+
+.card-entree {
+    text-align: right;
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
 /* .card{
     width: 40rem;
     height: 10rem;
