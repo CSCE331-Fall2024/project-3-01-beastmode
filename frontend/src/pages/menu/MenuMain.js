@@ -1,9 +1,11 @@
 import { React, useState, useEffect } from "react";
 import api from '../../services/api' // Axios instance with base URL
+import '../../styles/menu.css';
 
 //components
 import MenuBoardHowTo from "./components/MenuBoardHowTo";
 import MenuBoardSide from "./components/MenuBoardSide";
+import MenuBoardEntree from "./components/MenuBoardEntree";
 
 // images
 import BowlImage from '../../assets/bowl.png';
@@ -30,56 +32,63 @@ function MenuMain() {
   }, []);
 
   return (
-    <div className="container-fluid" /*style={{ width: "1400px"}}*/>
+    <div className="container-fluid">
+      <div className="row">
+        <div className="row row-style-1">
+          <h1>Pick Your Meal</h1>
+        </div>
         <div className="row">
-          <div className="col-5">
-            <div className="row" style={{ backgroundColor: "#A3080C"}}>
-              <h1>Pick Your Meal</h1>
-            </div>
-            <div className="row">
-              {/* <h1>Bowl</h1> */}
-              <MenuBoardHowTo name={"Bowl"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"280-1130 cal"} description={"1 side & 1 entree"} price={"$8.30"}/>
-            </div>
-            <div className="row">
-              <MenuBoardHowTo name={"Plate"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"430-1640 cal"} description={"1 side & 2 entrees"} price={"$9.80"}/>
-            </div>
-            <div className="row">
-              <MenuBoardHowTo name={"Bigger Plate"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"580-2150 cal"} description={"1 side & 3 entrees"} price={"$11.30"}/>
-            </div>
-            <div className="row">
-              <MenuBoardHowTo name={"A La Carte"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"430-1640 cal"} description={"Individual Entrees & Sides"} price={"$4.40"}/>
-            </div>
-            <div className="row">
-              <MenuBoardHowTo name={"Family Meal"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"430-1640 cal / serving"} description={"2 large sides & 3 large entrees"} price={"$43.00"}/>
-            </div>
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
           </div>
-          <div className="col-7">
-            <div className="row" style={{ backgroundColor: "#A3080C"}}>
-              <h1>Sides</h1>
-            </div>
-            {/* <div className="row">
-              <MenuBoardSide name={"Super Greens"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"130 cal"}/>
-            </div> */}
-            <div className="row">
-              <div className="col">
-                <MenuBoardSide name={"Super Greens"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"130 cal"}/>
-              </div>
-              <div className="col">
-                <MenuBoardSide name={"Chow Mein"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"600 cal"}/>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col">
-                <MenuBoardSide name={"Fried Rice"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"620 cal"}/>
-              </div>
-              <div className="col">
-                <MenuBoardSide name={"White Steamed Rice"} image={<img src ={BowlImage} style={{ width: '110%'}}/>} calories={"520 cal"}/>
-              </div>
-            </div>
-
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
+          </div>
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
+          </div>
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
+          </div>
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
           </div>
         </div>
+        <div className="row">
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
+          </div>
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
+          </div>
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
+          </div>
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
+          </div>
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
+          </div>
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
+          </div>
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
+          </div>
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
+          </div>
+          <div className="col">
+            <MenuBoardEntree name={"Super Greens"} image={<img src ={BowlImage}/>} calories={"130 cal"}/>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

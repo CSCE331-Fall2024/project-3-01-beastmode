@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+French+Canon:ital@0;1&family=Jomhuria&display=swap');
+
+
+img {
+    width: 110%;
+}
+
+.a-la-carte-image {
+    width: 70%;
+    float: right;
+}
+
+/* .card{
+    width: 40rem;
+    height: 10rem;
+} */
+
+.row-style-1 {
+    background-color: #A3080C;
+    color: white;
+    text-align: center;
+}
+
+.row-style-2 {
+    background-color: black;
+}
+
+.dynamic-text {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    white-space: nowrap;
+}
+
+/* .card-subtitle {
+    container-type: inline-size;
+}
+
+.card-subtitle > h3  {
+    font-size: clamp(1rem, 2vw, 2rem);
+    white-space: nowrap;
+} */

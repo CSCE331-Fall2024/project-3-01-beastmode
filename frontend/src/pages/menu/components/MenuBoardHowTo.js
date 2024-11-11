@@ -13,7 +13,7 @@ const MenuBoardHowTo = ({name, image, calories, description, price}) => {
                         <h1 className='card-title'>
                             {name}
                         </h1>
-                        <h3 className='card-subtitle'>
+                        <h3 className='card-subtitle flex-fill responsive-flex-text'>
                             {description}
                         </h3>
                         <p className='card-text'>
