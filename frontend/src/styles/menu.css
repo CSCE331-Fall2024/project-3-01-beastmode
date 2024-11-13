@@ -33,7 +33,7 @@ img {
 
 .appetizer-card{
     position: relative;
-    height: 14vw !important;
+    /* height: 14vw !important; */
 }
 
 .ad-card{
@@ -155,6 +155,10 @@ img {
 .drinks-card{
     text-align: center;
     /* position: absolute; */
+}
+
+.card-drink{
+    padding-left: 4%;
 }
 
 .drinks-table {

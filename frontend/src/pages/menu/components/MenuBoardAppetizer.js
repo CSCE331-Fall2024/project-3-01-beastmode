@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../../styles/menu.css';
 
-const MenuBoardEntree = ({name, image, smPrice, mdPrice, lgPrice, isPremium, isSeasonal}) => {
+const MenuBoardAppetizer = ({name, image, smPrice, mdPrice, lgPrice, isPremium, isSeasonal}) => {
     return (
         <div className='card my-2 appetizer-card'>
             <div className="row text-div">
@@ -67,4 +67,4 @@ const MenuBoardEntree = ({name, image, smPrice, mdPrice, lgPrice, isPremium, isS
     );
 };
 
-export default MenuBoardEntree;
+export default MenuBoardAppetizer;

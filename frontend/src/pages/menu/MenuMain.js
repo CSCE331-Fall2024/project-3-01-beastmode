@@ -7,6 +7,7 @@ import MenuBoardHowTo from "./components/MenuBoardHowTo";
 import MenuBoardSide from "./components/MenuBoardSide";
 import MenuBoardEntree from "./components/MenuBoardEntree";
 import MenuBoardAppetizer from "./components/MenuBoardAppetizer";
+import MenuBoardDrinks from "./components/MenuBoardDrinks";
 
 // images
 import Pepsi from '../../assets/pepsi_logo.png';
@@ -89,7 +90,21 @@ function MenuMain() {
           <img className="drink-image" src ={Tropicana}/>
         </div>
       </div>
-
+    </div>
+    <div className="row">
+      <div className="col">
+        <MenuBoardDrinks name={"chicken egg roll"} price={"130 cal"}/>
+      </div>
+    </div>
+    <div className="row">
+      <div className="col">
+        <MenuBoardDrinks name={"Beastmode Energy Drink"} price={"130 cal"}/>
+      </div>
+    </div>
+    <div className="row">
+      <div className="col">
+        <MenuBoardDrinks name={"chicken egg roll"} price={"130 cal"}/>
+      </div>
     </div>
     
     
