@@ -147,9 +147,9 @@ function MenuMain() {
         <div className="col-1">
           <div className="banner premium-banner banners-container-display">P</div>
         </div>
-        <div className="col-7 text-desc">
+        <div className="col-7">
           
-          <h3> Premium </h3>
+          <h3 className="text-desc"> Premium </h3>
           <h6> $1.50 upcharge on Entree  |  $4.50 upcharge on Family Meal Entree </h6>
         </div>
         <div className="col-1">
@@ -157,7 +157,7 @@ function MenuMain() {
         </div>
         <div className="col-3 text-desc">
           
-          <h3> Seasonal </h3>
+          <h3 className="text-desc"> Seasonal </h3>
         </div>
         </div>
         

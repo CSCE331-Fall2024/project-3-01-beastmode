@@ -106,7 +106,7 @@ img {
 }
 
 .dynamic-text {
-    font-size: clamp(1rem, 2vw, 1.5rem);
+    /* font-size: clamp(1rem, 2vw, 1.5rem); */
     white-space: nowrap;
 }
 
@@ -135,6 +135,15 @@ img {
     right: 5%;
 }
 
+.banners-container-display {
+    display: flex;
+    position: absolute;
+    /* bottom: 45%;
+    z-index: 1; */
+    /* right: 0%; */
+    margin-top: 2%;
+}
+
 .banner {
     color: white;
     padding: 5px 10px;
@@ -146,6 +155,11 @@ img {
 
 .seasonal-banner {
     background-color: #a3080c;
+}
+
+.seasonal-banner2 {
+    background-color: #a3080c;
+    margin-left: 60%;
 }
 
 .premium-banner {
@@ -179,3 +193,11 @@ img {
     /* float: right; */
 }
 
+.icon-card {
+    height: 5vw !important;
+}
+
+.text-desc {
+    margin-top: 2%;
+    /* margin-left: 5%; */
+}

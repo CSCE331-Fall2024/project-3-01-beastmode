@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import api from './services/api';
 
 // Import all pages
-import { MenuMain } from './pages/menu';
+import { MainMenu } from './pages/menu';
 import { KitchenMain } from './pages/kitchen';
 import { ManagerMain } from './pages/manager';
 import { KioskMain } from './pages/kiosk';
@@ -47,7 +47,7 @@ function App() {
               </>
             }
           />
-          <Route path="/menu" element={<MenuMain />} />
+          <Route path="/menu" element={<MainMenu />} />
           <Route path="/kitchen" element={<KitchenMain />} />
           <Route path="/manager" element={<ManagerMain />} />
           <Route path="/kiosk" element={<KioskMain />} />

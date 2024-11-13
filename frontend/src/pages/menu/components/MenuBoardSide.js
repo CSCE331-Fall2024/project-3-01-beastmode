@@ -7,9 +7,9 @@ const MenuBoardSide = ({name, image, calories, icons}) => {
             <div className="row">
                 <div className="col-8">
                     <div className='card-body'>
-                        <h1 className='card-title dynamic-text'>
+                        <h2 className='card-title dynamic-text'>
                             {name}
-                        </h1>
+                        </h2>
                     </div>
                 </div>
                 <div className="col">
