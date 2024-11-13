@@ -6,8 +6,17 @@ import '../../styles/menu.css';
 import MenuBoardHowTo from "./components/MenuBoardHowTo";
 import MenuBoardSide from "./components/MenuBoardSide";
 import MenuBoardEntree from "./components/MenuBoardEntree";
+import MenuBoardAppetizer from "./components/MenuBoardAppetizer";
 
 // images
+import Pepsi from '../../assets/pepsi_logo.png';
+import Brisk from '../../assets/brisk.png';
+import MtnDew from '../../assets/mtn_dew.png';
+import Tropicana from '../../assets/tropicana.png';
+
+import BCkn from '../../assets/burboun_ckn.png';
+import ApplePie from '../../assets/apple_pie.png';
+
 import BowlImage from '../../assets/bowl.png';
 // import PlateImage from '../../assets/plate.png';
 // import BiggerPlateImage from '../../assets/bigger-plate.png';
@@ -34,7 +43,7 @@ function MenuMain() {
   return (
     <div className="container-fluid" /*style={{ width: "1400px"}}*/>
 <div className="row">
-  <div className="col">
+  <div className="col-3">
     <div className="row row-style-1">
       <h1>Drinks</h1>
     </div>
@@ -64,6 +73,23 @@ function MenuMain() {
         </tbody>
       </table>
 
+      <div className="row">
+        <div className="col">
+          <img className="drink-image" src ={Pepsi}/>
+        </div>
+        <div className="col">
+          <img className="drink-image" src ={MtnDew}/>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <img className="drink-image" src ={Brisk}/>
+        </div>
+        <div className="col">
+          <img className="drink-image" src ={Tropicana}/>
+        </div>
+      </div>
+
     </div>
     
     
@@ -72,6 +98,32 @@ function MenuMain() {
     <div className="row row-style-1">
       <h1>Appetizers</h1>
     </div>
+    <div className="row">
+      <div className="col">
+        <MenuBoardAppetizer name={"chicken egg roll"} calories={"130 cal"} isPremium = {true} isSeasonal = {true} image={<img src ={BowlImage}/>}/>
+      </div>
+      <div className="col">
+        <MenuBoardAppetizer name={"chicken egg roll"} calories={"130 cal"} isPremium = {true} isSeasonal = {true}/>
+      </div>
+    </div>
+
+    <div className="row">
+      <div className="col">
+        <MenuBoardAppetizer name={"chicken egg roll"} calories={"130 cal"} smPrice={"$2.30"} mdPrice={"$2.30"} lgPrice={"$2.30"} isPremium = {true} isSeasonal = {true} image={<img src ={BowlImage}/>}/>
+      </div>
+      <div className="col">
+        <MenuBoardAppetizer name={"chicken egg roll"} calories={"130 cal"} isPremium = {true} isSeasonal = {true}/>
+      </div>
+    </div>
+
+    <div className="row">
+      <div className="col">
+        <MenuBoardAppetizer name={"chicken egg roll"} calories={"130 cal"} isPremium = {true} isSeasonal = {true}/>
+      </div>
+      <div className="col">
+        <MenuBoardAppetizer name={"chicken egg roll"} calories={"130 cal"} isPremium = {true} isSeasonal = {true}/>
+      </div>
+    </div>
     
 
 
@@ -80,9 +132,18 @@ function MenuMain() {
 
 
   </div>
-  <div className="col">
+  <div className="col-3">
     <div className="row row-style-1">
       <h1>Seasonal</h1>
+    </div>
+    
+    <div className="row">
+      <div className='card my-2 ad-card'>
+        <img className="card-img-top" src ={BCkn}/>
+      </div>
+      <div className='card my-2 ad-card'>
+        <img className="card-img-top" src ={ApplePie}/>
+      </div>
     </div>
     
   </div>

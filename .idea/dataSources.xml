@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="csce331_01@csce-315-db.engr.tamu.edu" uuid="0fb91ab8-31b1-4d86-ad89-85c5fe114917">
+    <data-source source="LOCAL" name="csce331_01@csce-315-db.engr.tamu.edu" uuid="e9dbb240-38f0-45e2-8677-0acf976ba7cb">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
