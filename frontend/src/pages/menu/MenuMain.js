@@ -32,64 +32,62 @@ function MenuMain() {
   }, []);
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="row row-style-1">
-          <h1>Entrees</h1>
-        </div>
-        <div className="row">
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-          <div className="col">
-            <MenuBoardEntree name={"Super Greens"} image={<img className="entree-image" src ={BowlImage}/>} calories={"130 cal"}/>
-          </div>
-        </div>
-      </div>
+    <div className="container-fluid" /*style={{ width: "1400px"}}*/>
+<div className="row">
+  <div className="col">
+    <div className="row row-style-1">
+      <h1>Drinks</h1>
     </div>
+    <div className="card my-2 drinks-card">
+      <h1>Fountain Drinks</h1>
+
+      <table className="col table drinks-table">
+        <thead>
+          <tr>
+            <th scope="col">  </th>
+            <th scope="col">  </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"> Sm </th>
+            <td> $5.20 </td>
+          </tr>
+          <tr>
+            <th scope="row"> Med </th>
+            <td> $8.50 </td>
+          </tr>
+          <tr>
+            <th scope="row"> Lg </th>
+            <td> $11.20 </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    
+    
+  </div>
+  <div className="col-6">
+    <div className="row row-style-1">
+      <h1>Appetizers</h1>
+    </div>
+    
+
+
+    
+    
+
+
+  </div>
+  <div className="col">
+    <div className="row row-style-1">
+      <h1>Seasonal</h1>
+    </div>
+    
+  </div>
+</div>
+</div>
   );
 }
 
