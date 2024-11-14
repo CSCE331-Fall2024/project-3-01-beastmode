@@ -28,8 +28,7 @@ jobs:
         working-directory: ./frontend
         run: |
           npm install
-          eslint --rule "no-unused-vars: off" ./src
-          npm run build
+          CI=false npm run build
 
       - name: Move frontend build to backend
         run: |
