@@ -97,21 +97,9 @@ def callback():
             audience=GOOGLE_CLIENT_ID,
             clock_skew_in_seconds=6000
         )
-        
-        # id_token_str = credentials._id_token
-        # token_parts = id_token_str.split('.')
-
-        # payload_encoded = token_parts[1]
-
-        # padding = '=' * (4 - len(payload_encoded) % 4)
-        # payload_decoded = base64.urlsafe_b64decode(payload_encoded + padding)
-        
-        # payload_json = json.loads(payload_decoded)
-
-        # email = payload_json.get("email")
-
 
         email = id_info.get("email")
+
 
         with db.session.begin():
             employee = db.session.query(Employee).filter_by(email=email).first()
