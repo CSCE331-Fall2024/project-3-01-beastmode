@@ -46,8 +46,8 @@ export function NavBar(){
 
           {/*home button*/}
           <div class="col">
-            <button className="home-button" id="home-button" onClick={navHome}>
-              <img className="logo" src={beastLogo} alt="Beastmode logo"></img>
+            <button className="home-button" >
+              <img className="logo" src={beastLogo} alt="Beastmode logo" id="home-button" onClick={navHome}></img>
             </button>
           </div>
 

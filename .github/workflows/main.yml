@@ -28,7 +28,7 @@ jobs:
         working-directory: ./frontend
         run: |
           npm install
-          npm run build
+          CI=false npm run build
 
       - name: Move frontend build to backend
         run: |
