@@ -2,7 +2,6 @@ from flask import Flask
 from app import register_extensions, register_blueprints, register_secret_key
 from app.config import Config
 import os
-from dotenv import load_dotenv
 import pathlib
 from google_auth_oauthlib.flow import Flow
 
@@ -11,7 +10,6 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 # Register extensions and blueprints
-load_dotenv()
 register_extensions(app)
 register_blueprints(app)
 register_secret_key(app)

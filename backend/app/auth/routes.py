@@ -14,7 +14,6 @@ import base64
 import json
 import requests
 import os
-from dotenv import load_dotenv
 
 GOOGLE_CLIENT_ID = "691942944903-g8cmnfe0iu3jujav9jpgonda6dkj9b8u.apps.googleusercontent.com"
 HASH_API_KEY = os.getenv('HASH_API_KEY')
@@ -75,7 +74,9 @@ def authenticate_db():
 @auth_bp.route("/signin/google", methods=["GET"])
 def authenticate_google():
     flow = current_app.config['OAUTH_FLOW']
-    authorization_url = flow.authorization_url()
+    authorization_url, state = flow.authorization_url()
+    session.clear()
+    session['state'] = state
     return redirect(authorization_url)
 
 
@@ -120,7 +121,6 @@ def callback():
                 re_route_link = current_app.config['base_url'] + "/manager"
             else:
                 re_route_link = current_app.config['base_url'] + "/pos"
-            session.clear()
             session["name"] = id_info.get("name")
             session["email"] = id_info.get("email")
             return redirect(re_route_link)
