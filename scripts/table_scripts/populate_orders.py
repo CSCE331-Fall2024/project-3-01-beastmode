@@ -1,4 +1,5 @@
 from random import *
+from datetime import datetime, timedelta, time
 
 ####GLOBAL VARIABLES####
 
@@ -42,7 +43,7 @@ appetizerProductIDs = {
     'applePieRoll': 21
 }
 
-appetizerProducts = ['chickenEggRoll', 'veggieSpringRoll', 'creamCheeseRangoon', 'applePieRoll']
+appetizerProducts = ['chickenEggRoll', 'veggieSpringRoll', 'creamCheeseRangoon']
 
 drinkProductIDs = {
     'drPepper': 22,
@@ -124,26 +125,14 @@ def generateEntree():
   return outputEntree, premiumMultiplier
 
 def generateAppetizer():
-  outputAppetizer = randrange(1,14)
+  outputAppetizer = randrange(1,13)
   if (outputAppetizer <= 7):
     outputAppetizer = 18
   elif (outputAppetizer <= 10):
     outputAppetizer = 19
   elif (outputAppetizer <= 12):
     outputAppetizer = 20
-  else:
-    outputAppetizer = 21
   return outputAppetizer
-
-def generateSmallDrink():
-  outputDrink = randrange(1,8)
-  if (outputDrink == 1):
-    outputDrink = 23
-  elif (outputDrink <= 3):
-    outputDrink = 24
-  else:
-    outputDrink = 22
-  return outputDrink
 
 def generateProducts(currentMenuItem):
   global orderMenuItemProductID
@@ -152,7 +141,6 @@ def generateProducts(currentMenuItem):
   global orderMenuItemProducts
 
   #[[order_menu_item_product_id (int), order_menu_item_id (int), product_id(int)], ..., ...]
-  currentProduct = []
   subtotalPrice = 0
 
   currentSide = -1
@@ -217,68 +205,73 @@ def generateProducts(currentMenuItem):
     subtotalPrice += 2
     orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, currentAppetizer]]
     orderMenuItemProductID += 1
-  elif (currentMenuItem == 'appetizerMedium'):
-    #only medium appetizer = apple pie roll
+  elif (currentMenuItem == 'appetizerLarge'):
+    currentAppetizer = generateAppetizer()
+    if ((currentAppetizer == 20)):
+      subtotalPrice += 8
+    else:
+      subtotalPrice += 11.2
+    orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, currentAppetizer]]
+    orderMenuItemProductID += 1
+  elif (currentMenuItem == 'dessertSmall'):
+    subtotalPrice += 2
+    orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, 21]]
+    orderMenuItemProductID += 1
+  elif(currentMenuItem == 'dessertMedium'):
     subtotalPrice += 6.2
     orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, 21]]
     orderMenuItemProductID += 1
-  elif (currentMenuItem == 'appetizerLarge'):
-    currentAppetizer = generateAppetizer()
-    if ((currentAppetizer == 19) or (currentAppetizer == 18)):
-      subtotalPrice += 11.2
-    else:
-      subtotalPrice += 8
-    orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, currentAppetizer]]
+  elif (currentMenuItem == 'dessertLarge'):
+    subtotalPrice += 8
+    orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, 21]]
     orderMenuItemProductID += 1
-  elif (currentMenuItem == 'aLaCarteSmall'):
+  elif (currentMenuItem == 'aLaCarteSideMedium'):
+    currentSide = generateSide()
+    subtotalPrice += 4.4
+    orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, currentSide] ]
+    orderMenuItemProductID += 1
+  elif (currentMenuItem == 'aLaCarteSideLarge'):
+    currentSide = generateSide()
+    subtotalPrice += 5.4
+    orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, currentSide] ]
+    orderMenuItemProductID += 1
+  elif (currentMenuItem == 'aLaCarteEntreeSmall'):
     #can only be entree
     currentEntree, premiumMultiplier = generateEntree()
     subtotalPrice += 5.2 + 1.5*premiumMultiplier
     orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, currentEntree]]
     orderMenuItemProductID += 1
-  elif (currentMenuItem == 'aLaCarteMedium'):
-    #choose side or entree
-    sideOrEntree = randrange(1,4)
-    if (sideOrEntree <= 2): #entree
-      currentEntree, premiumMultiplier = generateEntree()
-      subtotalPrice += 8.5 + 3*premiumMultiplier
-      orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, currentEntree]]
-      orderMenuItemProductID += 1
-    else: #side
-      currentSide = generateSide()
-      subtotalPrice += 4.4
-      orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, currentSide] ]
-      orderMenuItemProductID += 1
-  elif (currentMenuItem == 'aLaCarteLarge'):
-    #choose side or entree
-    sideOrEntree = randrange(1,4)
-    if (sideOrEntree <= 2): #entree
-      currentEntree, premiumMultiplier = generateEntree()
-      subtotalPrice += 11.2 + 4.5*premiumMultiplier
-      orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, currentEntree]]
-      orderMenuItemProductID += 1
-    else: #side
-      currentSide = generateSide()
-      subtotalPrice += 5.4
-      orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, currentSide] ]
-      orderMenuItemProductID += 1
-  elif (currentMenuItem == 'drinkSmall'):
-    currentDrink = generateSmallDrink()
-    if (currentDrink == 22): #fountainDrink
-      subtotalPrice += 2.1
-    elif (currentDrink == 23): #aquafina
-      subtotalPrice += 2.3
-    elif (currentDrink == 24): #gatorade
+  elif (currentMenuItem == 'aLaCarteEntreeMedium'):
+    currentEntree, premiumMultiplier = generateEntree()
+    subtotalPrice += 8.5 + 3*premiumMultiplier
+    orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, currentEntree]]
+    orderMenuItemProductID += 1
+  elif (currentMenuItem == 'aLaCarteEntreeLarge'):
+    currentEntree, premiumMultiplier = generateEntree()
+    subtotalPrice += 11.2 + 4.5*premiumMultiplier
+    orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, currentEntree]]
+    orderMenuItemProductID += 1 
+  elif (currentMenuItem == 'drinks'):
+    currentDrink = randrange(30, 33)
+    if currentDrink == 30: #aquafina
+        subtotalPrice += 2.3
+    elif currentDrink == 31: #gatoradlemonLime
       subtotalPrice += 2.7
+    elif currentDrink == 32: #beastmode Energy Drink
+      subtotalPrice += 3.3
     orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, currentDrink] ]
     orderMenuItemProductID += 1
-  elif (currentMenuItem == 'drinkMedium'):
-    subtotalPrice += 2.3
-    orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, 22] ]
+  elif (currentMenuItem == 'drinksSmall'):
+    subtotalPrice += 2.1
+    orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, randrange(22, 30)] ]
     orderMenuItemProductID += 1
-  elif (currentMenuItem == 'drinkLarge'):
+  elif (currentMenuItem == 'drinksMedium'):
+    subtotalPrice += 2.3
+    orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, randrange(22,30)] ]
+    orderMenuItemProductID += 1
+  elif (currentMenuItem == 'drinksLarge'):
     subtotalPrice += 2.5
-    orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, 22] ]
+    orderMenuItemProducts += [[orderMenuItemProductID, orderMenuItemID, randrange(22, 30)] ]
     orderMenuItemProductID += 1
   return subtotalPrice
 
@@ -307,12 +300,28 @@ def createMenuItems(menuItemsInOrder):
 
 #OUTPUT: random total price given restricted number of menu items
 def generateOrder():
-  quantityItems = {'bowl': 0, 'plate': 0, 'biggerPlate': 0, 'familyMeal': 0, 'appetizerSmall': 0, 'appetizerMedium': 0, 'appetizerLarge': 0, 'aLaCarteSmall': 0, 'aLaCarteMedium': 0, 'aLaCarteLarge': 0, 'drinkSmall': 0, 'drinkMedium': 0, 'drinkLarge': 0}
-  
-  '''
-  for i in range(8):
-    quantityItems[menuItemsList[i]] = randrange(0,2)
-  '''
+  quantityItems = {
+    'bowl': 0,
+    'plate': 0,
+    'biggerPlate': 0,
+    'familyMeal': 0,
+    'appetizerSmall': 0,
+    'appetizerLarge': 0,
+    'aLaCarteSideMedium': 0,
+    'aLaCarteSideLarge': 0,
+    'aLaCarteEntreeSmall': 0,
+    'aLaCarteEntreeMedium': 0,
+    'aLaCarteEntreeLarge': 0,
+    'dessertSmall': 0,
+    'dessertMedium': 0,
+    'dessertLarge': 0,
+    'drinksSmall': 0,
+    'drinksMedium': 0,
+    'drinksLarge': 0,
+    'drinks': 0
+  }
+
+  #bowl plate or biggerplate
   numEntrees = randrange(0, 14)
   if (1 <= numEntrees <= 10):
     numEntrees = 1
@@ -331,8 +340,8 @@ def generateOrder():
     elif (mainItem == 26):
       quantityItems['familyMeal'] += 1
   
-  
-  if (numEntrees >= 2):
+  #drink small/med/large
+  if (numEntrees >= 2): #generates number of drinks
       numDrinks = randrange(1,3)
   else:
     numDrinks = randrange(1, 13)
@@ -340,15 +349,19 @@ def generateOrder():
       numDrinks = 0
     elif (numDrinks <= 12):
       numDrinks = 1
-  for i in range(numDrinks):
-    drinkItem = randrange(1,16)
-    if (drinkItem <= 8):
-      quantityItems['drinkSmall'] += 1
-    elif (drinkItem <= 13):
-      quantityItems['drinkMedium'] += 1
+
+  for i in range(numDrinks): #assigns a specific drink for the number of drinks
+    drinkItem = randrange(1,18)
+    if (drinkItem <= 4):
+      quantityItems['drinksSmall'] += 1
+    elif (drinkItem <= 10):
+      quantityItems['drinksMedium'] += 1
+    elif (drinkItem <= 14):
+      quantityItems['drinksLarge'] += 1
     else:
-      quantityItems['drinkLarge'] += 1
+      quantityItems['drinks'] += 1
   
+  #for each entree generates appetizer/dessert
   for i in range(numEntrees):
     isAppetizer = randrange(1, 11)
     if (isAppetizer <= 2):
@@ -356,14 +369,13 @@ def generateOrder():
     else:
       isAppetizer = False
     if (isAppetizer):
-      appetizerItem = randrange(1,13)
-      if (appetizerItem <= 8):
-        quantityItems['appetizerSmall'] += 1
-      elif (appetizerItem <= 11):
-        quantityItems['appetizerMedium'] += 1
-      elif (appetizerItem == 12):
-        quantityItems['appetizerLarge'] += 1
+      appetizerItem = randrange(1,3)
+      if (appetizerItem <= 2):
+        quantityItems[menuItemsList[randrange(4, 6)]] += 1
+      else:
+        quantityItems[menuItemsList[randrange(11,14)]] += 1
   
+  #calculates number of ALaCarte
   if (numEntrees == 0):
     numALaCarte = randrange(1,5)
     if (numALaCarte == 4):
@@ -377,14 +389,23 @@ def generateOrder():
     else:
       numALaCarte = 1
   
+  #Assigns an ALaCarte for the number of ALaCartes
   for i in range(numALaCarte):
-    ALaCarteItem = randrange(1, 10)
-    if (ALaCarteItem <= 5):
-      quantityItems['aLaCarteSmall'] += 1
-    elif (ALaCarteItem <= 8):
-      quantityItems['aLaCarteMedium'] += 1
-    else:
-      quantityItems['aLaCarteLarge'] += 1
+    sideOrEntree = randrange(1,4)
+    if (sideOrEntree == 3): #aLaCarte Side
+      ALaCarteItem = randrange(1, 3)
+      if (ALaCarteItem == 1):
+        quantityItems['aLaCarteSideMedium'] += 1
+      else:
+        quantityItems['aLaCarteSideLarge'] += 1
+    else: #aLaCarteEntiree
+      ALaCarteItem = randrange(1, 10)
+      if (ALaCarteItem <= 5):
+        quantityItems['aLaCarteEntreeSmall'] += 1
+      elif (ALaCarteItem <= 8):
+        quantityItems['aLaCarteEntreeMedium'] += 1
+      else:
+        quantityItems['aLaCarteEntreeLarge'] += 1
 
   return quantityItems
   # currentTotalPrice = quantityItems['bowl']*(menuPrices['bowl']) + quantityItems['plate']*(menuPrices['plate']) + quantityItems['biggerPlate']*(menuPrices['biggerPlate']) + quantityItems['aLaCarteSmall']*(menuPrices['aLaCarteSmall']) + quantityItems['aLaCarteMedium']*(menuPrices['aLaCarteMedium']) + quantityItems['aLaCarteLarge']*(menuPrices['aLaCarteLarge']) + quantityItems['appetizerSmall']*(menuPrices['appetizerSmall']) + quantityItems['drinkMedium']*(menuPrices['drinkMedium'])
@@ -486,7 +507,14 @@ with open("populate_order.sql", 'w') as file2:
   file2.write("VALUES\n")
 
   #peak days 2024-08-31 & 2024-04-13 
-  currentDate = "2022-09-23 10:00:00" #1 year before scripts were made
+  currentDate = datetime.fromisoformat("2022-09-23 10:00:00") 
+  maxDate = datetime.today()
+  openTime = time(10,0)
+  closeTime = time(22,0)
+
+  #peak days = 8/31/24 & 4/13/24
+  totalRevenue = 0
+  count = randrange(80, 101) #random method to determine how many orders on last day
 
   '''
   REQUIREMENTS:
@@ -495,41 +523,50 @@ with open("populate_order.sql", 'w') as file2:
   - approx 1 mil in sales for 1 year
   '''
 
-  #peak days = 8/31/24 & 4/13/24
-  totalRevenue = 0
-  count = randrange(101, 121) #random method to determine how many orders on last day
   while (True): #loop for 2 years
     menuItemsInOrder = generateOrder() #randomizing menu items in the order
     
     orderPriceBeforeTax = createMenuItems(menuItemsInOrder)
 
 
-    #checks if date = one of our two chosen peak days
-    if (("2024-08-31" in currentDate) or ("2024-04-13" in currentDate)): #should double on avg
-      if (" 12:" in currentDate): #lunch time
-        currentDate = incrementTime(currentDate, randrange(5, 31))
-      elif ((" 6:" in currentDate) or (" 7:" in currentDate) or (" 8:" in currentDate)): #dinner time
-        currentDate = incrementTime(currentDate, randrange(5, 46)) 
+    #checks if date = one of our two chosen peak days (every year)
+    if ((currentDate.month == 8 and currentDate.day==31) or (currentDate.day == 4 and currentDate.day == 13)): #should double on avg
+      if (currentDate.hour == 12): #lunch time
+        # currentDate = incrementTime(currentDate, randrange(5, 31))
+        currentDate += timedelta(seconds=randrange(5,31))
+      elif (6 <= currentDate.hour <= 8): #dinner time
+        # currentDate = incrementTime(currentDate, randrange(5, 46)) 
+        currentDate += timedelta(seconds=randrange(5, 46))
       else:
-        currentDate = incrementTime(currentDate, randrange(10, 301)) #10s-20 minutes
+        # currentDate = incrementTime(currentDate, randrange(10, 301)) #10s-20 minutes
+        currentDate += timedelta(seconds=randrange(10,301))
     else:
-      if (" 12:" in currentDate): #lunch time
-        currentDate = incrementTime(currentDate, randrange(5, 61))
-      elif ((" 6:" in currentDate) or (" 7:" in currentDate) or (" 8:" in currentDate)): #dinner time
-        currentDate = incrementTime(currentDate, randrange(5, 91)) 
+      if (currentDate.hour == 12): #lunch time
+        # currentDate = incrementTime(currentDate, randrange(5, 61))
+        currentDate += timedelta(seconds=randrange(5, 61))
+      elif (6 <= currentDate.hour <= 8): #dinner time
+        #currentDate = incrementTime(currentDate, randrange(5, 91)) 
+        currentDate += timedelta(seconds=randrange(5, 91))
       else:
-        currentDate = incrementTime(currentDate, randrange(10, 1201)) #10s-20 minutes
+        # currentDate = incrementTime(currentDate, randrange(10, 1201)) #10s-20 minutes
+        currentDate += timedelta(seconds=randrange(10, 1201))
+
+    #check time between panda hours
+    if (currentDate.time() < openTime) or (currentDate.time() > closeTime):
+      currentDate += timedelta(days=1)
+      currentDate = currentDate.replace(hour=10) #change hour to 10am if not between panda hours
+
 
     #ensuring correct SQL syntax
-    if ("2024-09-23" in currentDate):
+    if (maxDate.date() == currentDate.date()):
       if (count == 0):
-        file2.write(f"({orderID}, '{currentDate}', '{employeeID[randrange(0,3)]}', '{orderPriceBeforeTax*1.0825:.2f}');")
+        file2.write(f"({orderID}, '{currentDate.isoformat(' ')}', '{employeeID[randrange(0,len(employeeID))]}', '{orderPriceBeforeTax*1.0825:.2f}');")
         break
       else:
-        file2.write(f"({orderID}, '{currentDate}', '{employeeID[randrange(0,3)]}', '{orderPriceBeforeTax*1.0825:.2f}'),\n")
+        file2.write(f"({orderID}, '{currentDate.isoformat(' ')}', '{employeeID[randrange(0,len(employeeID))]}', '{orderPriceBeforeTax*1.0825:.2f}'),\n")
         count -= 1
     else:
-      file2.write(f"({orderID}, '{currentDate}', '{employeeID[randrange(0,3)]}', '{orderPriceBeforeTax*1.0825:.2f}'),\n")
+      file2.write(f"({orderID}, '{currentDate.isoformat(' ')}', '{employeeID[randrange(0,len(employeeID))]}', '{orderPriceBeforeTax*1.0825:.2f}'),\n")
     orderID += 1
     totalRevenue += orderPriceBeforeTax
 
@@ -556,7 +593,7 @@ with open("populate_order_menu_item_product.sql", 'w') as file4:
     else:
       file4.write(f'({orderMenuItemProduct[0]}, {orderMenuItemProduct[1]}, {orderMenuItemProduct[2]}),\n')
 
-print("Total revenue for 9/22-9/24: ", totalRevenue)
+print("Total revenue for 9/22-Present: ", totalRevenue)
     
 
     # currentMenuItem = orderMenuItem[2] #get menu item id from orderMenuItems

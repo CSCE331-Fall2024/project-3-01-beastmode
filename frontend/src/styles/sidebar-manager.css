@@ -1,0 +1,136 @@
+
+.manager-sidebar{
+    padding: 0;
+    position: absolute;
+    left:0;
+    height: 100%;
+    width: 300px;
+    background-color:#a3080c ;
+    box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.manager-sidebar-text{
+     margin-left: 10px;
+     color: white;
+     font-size: 25px;
+     text-decoration: none;
+     pointer-events: none;
+     
+}
+
+.manager-sidebar-text2{
+    margin-left: 20px;
+    color: white;
+    font-size: 20px;
+    text-decoration: none !important;
+    pointer-events: none;  
+}
+
+.manager-sidebar-text3{
+    margin-left: 15px;
+    color: white;
+    font-size: 20px;
+    text-decoration: none !important;
+    margin-left: 60px;
+    pointer-events: none;
+}
+
+.sidebar-divider{
+    margin:0;
+    padding: 0;
+    color: white;
+    height:2px;
+    background-color: white;
+}
+
+.divider-main{
+    margin:0;
+    padding: 0;
+    color: white;
+    height:3px;
+    background-color: white;
+}
+
+
+.logo-display{
+    padding:20px;
+    display: flex;
+    text-align: right;
+    align-items: center;
+}
+
+.logo-display:hover{
+    background-color:#8c070c ;
+}
+
+.logo-image{
+    width: 70px;
+    height: 70px;
+    pointer-events: none;
+}
+
+.sidebar-item{
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    text-align: right;
+    align-items: center;
+    text-decoration: none;
+  
+}
+
+.sidebar-item:hover{
+    background-color:#8c070c ;
+}
+
+.sidebar-icon{
+    margin-left: 10px;
+    color:white;
+    font-size: 30px;
+    margin-right: 0;
+    pointer-events: none;
+}
+
+.sidebar-icon-right{
+    margin-left: auto;
+    color:white;
+    font-size: 20px;
+    margin-right: 0;
+    pointer-events: none;
+}
+
+#dropdown-icon{
+    margin-left: 110px;
+    color:white;
+    font-size: 20px;
+    margin-right: 0;
+}
+
+#dropup-icon{
+    margin-left: 110px;
+    color:white;
+    font-size: 20px;
+    margin-right: 0;
+    display: none;
+}
+
+.sidebar-drop-items{
+    background:transparent;
+    text-decoration: none;
+    background-color:#8c070c ;
+    display: none;
+}
+
+.sidebar-drop-item{
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+}
+
+.sidebar-drop-item:hover{
+    background-color:#77070a;
+}

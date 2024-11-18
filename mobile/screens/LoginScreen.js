@@ -1,121 +1,131 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Alert, Dimensions, ActivityIndicator, ImageBackground } from 'react-native';
 import api from '../services/api';
+import ReusableButton from '../components/ReusableButton';
+import InputField from '../components/InputField';
+import BackButton from '../components/BackButton'; 
+
+const { height } = Dimensions.get('window');
 
 const LoginScreen = ({ navigation }) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const handleLogin = async () => {
+    if (email.trim() && password.trim()) {
+      setLoading(true);
+      setErrorMessage('');
       try {
-        const response = await api.get('/kiosk/desserts');
-        console.log('API Response:', response.data); // Debugging output
-        setData(response.data);
+        const response = await api.post('/auth/login/customer', { email, password });
+
+        if (response.status === 200 && response.data.success) {
+          const customerId = response.data.customer_id;
+          Alert.alert('Login Successful', `Welcome, ${email}!`);
+          navigation.navigate('Home', { customerId }); 
+        } else {
+          setErrorMessage(response.data.message || 'Invalid email or password.');
+        }
       } catch (err) {
-        console.error('Error fetching data:', err);
-        setError(err);
+        const errorMessage = err.response?.data?.message || 'An error occurred during login.';
+        setErrorMessage(errorMessage);
+        console.error('Login Error:', err);
       } finally {
         setLoading(false);
       }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
-    );
-  }
-
-  if (error) {
-    return (
-      <View style={styles.container}>
-        <Text>Error fetching data: {error.message}</Text>
-      </View>
-    );
-  }
-
-  const handleLogin = () => {
-    if (username.trim() && password.trim()) {
-      Alert.alert('Login Successful', `Welcome, ${username}!`);
-      // navigation.navigate('Home'); // Uncomment this if using navigation
     } else {
-      Alert.alert('Error', 'Please enter both username and password.');
+      setErrorMessage('Please enter both email and password.');
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={ styles.textPadding }>Data from /kiosk/desserts:</Text>
-      {data && Array.isArray(data) && data.length > 0 ? (
-        data.map((item, index) => (
-          <View key={index} style={styles.itemContainer}>
-            <Text>Product Name: {item.product_name}</Text>
-            <Text>Description: {item.product_description}</Text>
-            <Text>Calories: {item.calories}</Text>
-            <Text>Allergens: {item.allergens}</Text>
-          </View>
-        ))
-      ) : (
-        <Text>No data available</Text>
-      )}
+    <ImageBackground
+      source={{ uri: 'https://i.imgur.com/OO0tL1D.jpeg' }}
+      style={styles.background}
+    >
+      <BackButton onPress={() => navigation.goBack()} /> 
 
-      <Text style={styles.title}>Login</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <Button title="Login" onPress={handleLogin} />
-    </View>
+      <View style={styles.overlayContainer}>
+        <Text style={styles.title}>Welcome Back!</Text>
+
+        <InputField
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <InputField
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+
+        {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
+
+        <View style={styles.buttonContainer}>
+          {loading ? (
+            <ActivityIndicator size="large" color="#6200EE" />
+          ) : (
+            <ReusableButton
+              onPress={handleLogin}
+              text="Login"
+            />
+          )}
+        </View>
+
+        <Text style={styles.registerText}>
+          Don't have an account?{' '}
+          <Text style={styles.registerLink} onPress={() => navigation.navigate('Register')}>
+            Register here
+          </Text>
+        </Text>
+      </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  overlayContainer: {
+    flex: 1,
+    alignItems: 'center',
+    paddingTop: height * 0.34, 
     paddingHorizontal: 20,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(0, 0, 0, 0.75)', 
+    padding: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 20,
     textAlign: 'center',
+    marginBottom: 20,
+    color: '#fff',
   },
-  input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 12,
-    paddingHorizontal: 10,
+  buttonContainer: {
+    width: '80%',
+    alignItems: 'center',
   },
-  itemContainer: {
-    marginVertical: 10,
-    padding: 10,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginBottom: 15,
   },
-  textPadding: {
-    paddingTop: 10,
-  }
+  registerText: {
+    textAlign: 'center',
+    color: '#fff',
+    marginTop: 20,
+  },
+  registerLink: {
+    color: '#a3080c',
+    fontWeight: 'bold',
+  },
 });
 
 export default LoginScreen;

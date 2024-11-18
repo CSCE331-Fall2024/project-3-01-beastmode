@@ -1,4 +1,4 @@
-insert into product_item (product_id, product_name, type, is_seasonal, is_available, servings_remaining, allergens, display_icons, product_description, premium_addition, serving_size, calories, saturated_fat, carbohydrate, protein, image, is_premium, quantity_in_cases, servings_per_case, cost_per_case)
+insert into public.product_item (product_id, product_name, type, is_seasonal, is_available, servings_remaining, allergens, display_icons, product_description, premium_addition, serving_size, calories, saturated_fat, carbohydrate, protein, image, is_premium, quantity_in_cases, servings_per_case, cost_per_case)
 values  
 (1, 'chowMein', 'side', false, true, 50, 'Contains Sesame, Soybeans and Wheat.', 0, 'Stir-fried wheat noodles with onions, celery and cabbage.', 0.00, 11, 600, 4, 94, 15, 'https://i.imgur.com/TOgupaZ.png', false, 21, 50, 35.66),
 (2, 'friedRice', 'side', false, true, 50, 'Contains Sesame, Soybeans and Wheat.', 0, 'Prepared steamed white rice with soy sauce, eggs, peas, carrots and green onions.', 0.00, 11, 620, 4, 101, 13, 'https://i.imgur.com/jnVSbmw.png', false, 2, 75, 23.99),
@@ -21,14 +21,14 @@ values
 (19, 'veggieSpringRoll', 'appetizer', false, true, 50, 'Contains Sesame, Milk, Soybeans and Wheat.', 0, 'Cabbage, celery, carrots, green onions and Chinese noodles in a crispy wonton wrapper.', 3.20, 3.5, 240, 2, 24, 4, 'https://i.imgur.com/7Q1jHLA.png', false, 3, 20, 23.49),
 (20, 'creamCheeseRangoon', 'appetizer', false, true, 50, 'Contains Milk, Eggs and Wheat.', 0, 'Wonton wrappers filled with cream cheese and served with sweet and sour sauce.', 0.00, 2.4, 190, 5, 24, 5, 'https://i.imgur.com/kbJ5Pmj.png', false, 18, 20, 25.71),
 (21, 'applePieRoll', 'dessert', false, true, 50, 'Contains Wheat.', 0, 'Juicy apples and fall spices in a crispy rolled pastry, finished with cinnamon sugar', 0.00, 1.94, 150, 1, 30, 2, 'https://i.imgur.com/2CTfQbB.png', false, 22, 30, 30.95),
-(22, 'drPepper', 'drink', false, true, 50, null, 0, null, 0.00, 30, 360, 0, 98, 0, 'https://i.imgur.com/sVjYoi7.png', false, 7, 80, 47.75),
-(23, 'sweetTea', 'drink', false, true, 50, null, 0, null, 0.00, 22, 280, 0, 71, 0, 'https://i.imgur.com/pL8nOB7.png', false, 8, 80, 43.25),
-(24, 'pepsi', 'drink', false, true, 50, null, 0, null, 0.00, 12, 150, 0, 41, 0, 'https://i.imgur.com/atKMmWm.png', false, 6, 80, 42.34),
-(25, 'dietPepsi', 'drink', false, false, 50, null, 0, null, 0.00, 12, 0, 0, 0, 0, 'https://i.imgur.com/iMGBOxF.png', false, 0, 80, 42.34),
-(26, 'mountainDew', 'drink', false, true, 50, null, 0, null, 0.00, 12, 160, 0, 44, 0, 'https://i.imgur.com/ONDKOie.png', false, 14, 80, 46.63),
-(27, 'liptonBriskRaspberryIcedTea', 'drink', false, true, 50, null, 0, null, 0.00, 12, 80, 0, 20, 0, 'https://i.imgur.com/z5xd5xv.png', false, 7, 80, 39.9),
-(28, 'sierraMist', 'drink', false, true, 50, null, 0, null, 0.00, 12, 150, 0, 41, 0, 'https://i.imgur.com/pjXwh3w.png', false, 7, 80, 38.97),
-(29, 'tropicanaLemonade', 'drink', false, true, 50, null, 0, null, 0.00, 22, 280, 0, 71, 0, 'https://i.imgur.com/EI2AtgQ.png', false, 5, 80, 40.03),
 (30, 'aquafina', 'drink', false, true, 50, null, 0, null, 0.20, 20, 0, 0, 0, 0, 'https://i.imgur.com/9aSsQ1h.png', false, 15, 24, 14.99),
 (31, 'gatoradeLemonLime', 'drink', false, true, 50, null, 0, null, 0.60, 12, 80, 0, 22, 0, 'https://i.imgur.com/k0VTsZh.png', false, 24, 24, 10.12),
-(32, 'beastModeEnergy', 'drink', true, true, 50, null, 0, null, 1.20, 12, 5, 0, 1, 0, 'https://i.imgur.com/VHld5cj.png', true, 1, 12, 29.16);
+(26, 'mountainDew', 'fountainDrink', false, true, 50, null, 0, null, 0.00, 12, 160, 0, 44, 0, 'https://i.imgur.com/ONDKOie.png', false, 14, 80, 46.63),
+(22, 'drPepper', 'fountainDrink', false, true, 50, null, 0, null, 0.00, 30, 360, 0, 98, 0, 'https://i.imgur.com/sVjYoi7.png', false, 7, 80, 47.75),
+(24, 'pepsi', 'fountainDrink', false, true, 50, null, 0, null, 0.00, 12, 150, 0, 41, 0, 'https://i.imgur.com/atKMmWm.png', false, 6, 80, 42.34),
+(27, 'liptonBriskRaspberryIcedTea', 'fountainDrink', false, true, 50, null, 0, null, 0.00, 12, 80, 0, 20, 0, 'https://i.imgur.com/z5xd5xv.png', false, 7, 80, 39.9),
+(25, 'dietPepsi', 'fountainDrink', false, false, 50, null, 0, null, 0.00, 12, 0, 0, 0, 0, 'https://i.imgur.com/iMGBOxF.png', false, 0, 80, 42.34),
+(23, 'sweetTea', 'fountainDrink', false, true, 50, null, 0, null, 0.00, 22, 280, 0, 71, 0, 'https://i.imgur.com/pL8nOB7.png', false, 8, 80, 43.25),
+(29, 'tropicanaLemonade', 'fountainDrink', false, true, 50, null, 0, null, 0.00, 22, 280, 0, 71, 0, 'https://i.imgur.com/EI2AtgQ.png', false, 5, 80, 40.03),
+(32, 'beastModeEnergy', 'drink', true, true, 50, null, 0, null, 1.20, 12, 5, 0, 1, 100, 'https://i.imgur.com/VHld5cj.png', true, 1, 12, 29.16),
+(28, 'sierraMist', 'fountainDrink', false, true, 50, null, 0, null, 0.00, 12, 150, 0, 41, 0, 'https://i.imgur.com/pjXwh3w.png', false, 7, 80, 38.97);

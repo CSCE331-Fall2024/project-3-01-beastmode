@@ -82,19 +82,26 @@ export default function SignUpPage() {
         //email exists
       }
       else { //email does not exist in database (valid email)
-        try {
-          await api.post("/auth/signup", signupInput);
+        const hashData = await fetch(`${process.env.REACT_APP_HASH_API_KEY}hash?plain=${signupInput.password}`);
+
+        const hashPassword = await hashData.json();
+        if (hashPassword) {
+          await api.post("/auth/signup", {...signupInput, password: hashPassword["hashed"]});
+
           //adding to database successful
           clear();
           navigate("/auth/signup/success");
-        } catch (error) {
-          //issue adding signup info to database
+        }
+        else { //hash unable to be retrieved
           clear();
           navigate("/auth/signup/error");
         }
+        // await api.post("/auth/signup", signupInput);
+        // clear();
+        // navigate("/auth/signup/success");
       }
     } catch (error) {
-      //issue checking for redundant email in database
+      //Issue from API Call
       clear();
       navigate("/auth/signup/error");
     }

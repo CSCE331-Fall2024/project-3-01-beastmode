@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 // Import all pages
 import { MenuMain } from './pages/menu';
 import { KitchenMain } from './pages/kitchen';
-import { ManagerMain } from './pages/manager';
+import { ManagerMain,XReports,ZReports, RestockReports, Employees, Products, Inventory} from './pages/manager';
 import { KioskMain, KioskLanding, OrderSelection, DrinkSelection, AppsAndMoreSelection } from './pages/kiosk';
 import { PosMain } from './pages/pos';
-import { AuthMain, SignUpPage, SignUpError, SignUpSuccess } from './pages/auth';
+import { AuthMain, SignUpPage, SignUpError, SignUpSuccess, SignInError } from './pages/auth';
 
 // Cart Context API
 import { CartProvider } from './pages/kiosk/components/CartContext';
@@ -47,6 +47,13 @@ function App() {
 
             <Route path="/kitchen" element={<KitchenMain />} />
 
+          <Route path="/manager" element={<ManagerMain />} />
+          <Route path="/manager/xreports" element={<XReports />} />
+          <Route path="/manager/zreports" element={<ZReports />} />
+          <Route path="/manager/restockreports" element={<RestockReports />} />
+          <Route path="/manager/employees" element={<Employees />} />
+          <Route path="/manager/products" element={<Products/>} />
+          <Route path="/manager/inventory" element={<Inventory />} />
             <Route path="/manager" element={<ManagerMain />} />
 
           {/* ... other routes */}
@@ -61,12 +68,13 @@ function App() {
 
             <Route path="/pos" element={<PosMain />} />
 
-            <Route path="/auth" element={<AuthMain />} />
-            <Route path="/auth/signup" element={<SignUpPage />}></Route>
-            <Route path="/auth/signup/error" element={<SignUpError />}></Route>
-            <Route path="/auth/signup/success" element={<SignUpSuccess />}></Route>
-          </Routes>
-      </Router>
+          <Route path="/auth" element={<AuthMain />} />
+          <Route path="/auth/signup" element={<SignUpPage />}></Route>
+          <Route path="/auth/signup/error" element={<SignUpError />}></Route>
+          <Route path="/auth/signup/success" element={<SignUpSuccess />}></Route>
+          <Route path="/auth/signin/error" element={<SignInError />}></Route>
+        </Routes>
+    </Router>
     </CartProvider>
   );
 }

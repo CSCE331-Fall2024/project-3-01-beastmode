@@ -31,7 +31,7 @@ export default function SignUpError() {
                       <p className="signup-error-text">
                         Please try again later.
                       </p>
-                      <Link className="signup-error-text" to="/kiosk" tabIndex="1">Return to home</Link>
+                      <Link className="signup-error-text" to="/kiosk" tabIndex="1">Return to Kiosk</Link>
                     </div>
                   </div>
                 </div>

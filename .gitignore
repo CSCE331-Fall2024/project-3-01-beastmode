@@ -3,3 +3,4 @@ __pycache__/
 backend/venv/
 .idea/
 .DS_Store
+.env

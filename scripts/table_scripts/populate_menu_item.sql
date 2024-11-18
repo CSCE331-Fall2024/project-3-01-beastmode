@@ -14,7 +14,7 @@ values
 (12, 'dessertSmall', null, null, 2, 1, null, null, null),
 (13, 'dessertMedium', null, null, 6.2, 1, null, null, null),
 (14, 'dessertLarge', null, null, 8, 1, null, null, null),
-(15, 'drinksSmall', null, null, 21, 1, null, null, null),
+(15, 'drinksSmall', null, null, 2.1, 1, null, null, null),
 (16, 'drinksMedium', null, null, 2.3, 1, null, null, null),
 (17, 'drinksLarge', null, null, 2.5, 1, null, null, null),
 (18, 'drinks', null, null, 2.1, 1, 'Add a Refreshing Beverage', '0-570 Cal per serving', 'https://i.imgur.com/H5POm5V.png');

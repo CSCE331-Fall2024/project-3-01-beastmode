@@ -38,16 +38,25 @@ class MenuItem(db.Model):
     calories = db.Column(db.String(30), nullable=False)
     image = db.Column(db.String(200), nullable=True)
 
-class User(db.Model):
-    __tablename__ = 'user_info'
+class Customer(db.Model):
+    __tablename__ = 'customer_info'
     
-    user_id = db.Column(db.Integer, primary_key=True)
-    points = db.Column(db.Integer, nullable=False)
+    customer_id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(255), nullable=False)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    beast_points = db.Column(db.Integer, nullable=False)
+
+class Employee(db.Model):
+    __tablename__ = 'employee_info'
+
+    employee_id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(50), nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     role = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String(255), nullable=False)
 
 
 class Order(db.Model):

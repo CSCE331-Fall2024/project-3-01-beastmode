@@ -24,7 +24,7 @@ export default function SignUpSuccess() {
                       <p className="signup-success-links">
                         You can log in with your new account <Link to="/auth" tabIndex="1">here</Link>
                       </p>
-                      <Link className="signup-success-links" to="/kiosk" tabIndex="2">Return to home</Link>
+                      <Link className="signup-success-links" to="/kiosk" tabIndex="2">Return to Kiosk</Link>
                     </div>
                   </div>
                 </div>

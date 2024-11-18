@@ -1,0 +1,100 @@
+.login-container {
+    width: 500px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+.login-container h1 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+.login-container h2 {
+    font-size: 1.0em;
+    color: #333;
+    font-weight: bold;
+}
+
+.login-container .form-control {
+    background-color: #d3d3d3;
+    border: none;
+    border-radius: 20px;
+}
+
+.login-container .btn-primary {
+    background-color: #A3080C;
+    color: white;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.login-container .btn-primary:hover {
+    background-color: #8d2323;
+}
+
+.login-container p {
+    color: #A3080C;
+    margin-top: 10px;
+}
+
+.login-container .my-2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.login-container .mt-3 {
+    margin-top: 15px;
+}
+
+.login-page {
+    background-image: url('../assets/sigin_background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.login-container .google-login-btn {
+    background-color: #A3080C;
+    color: white;
+    width: 200px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .login-container .google-login-btn:hover {
+    background-color:  #8d2323;;
+  }
+  
+  .login-container .google-icon {
+    margin-right: 8px;
+    width: 25px;
+    height: 25px;
+  }
+
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+  }
