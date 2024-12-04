@@ -39,19 +39,19 @@ const DrinkSelection = () => {
 
   const sizeOptions = [
     {
-      item_name: 'drinksSmall',
+      item_name: 'drinkSmall',
       display_name: 'Small',
       menu_item_base_price: 2.10,
       premium_multiplier: 1,
     },
     {
-      item_name: 'drinksMedium',
+      item_name: 'drinkMedium',
       display_name: 'Medium',
       menu_item_base_price: 2.30,
       premium_multiplier: 1,
     },
     {
-      item_name: 'drinksLarge',
+      item_name: 'drinkLarge',
       display_name: 'Large',
       menu_item_base_price: 2.50,
       premium_multiplier: 1,
@@ -74,7 +74,7 @@ const DrinkSelection = () => {
         ...drink,
         basePrice: basePrice,
         premiumMultiplier: premiumMultiplier,
-        menuItemName: 'drinks',
+        name: 'drink',
       };
 
       addToCart(cartItem);
@@ -106,8 +106,10 @@ const DrinkSelection = () => {
       size: size, // Include size information
       basePrice: size.menu_item_base_price,
       premiumMultiplier: size.premium_multiplier,
-      menuItemName: size.item_name,
+      name: size.item_name,
+      product_id: selectedDrink.product_id,
     };
+    console.log(size.item_name)
 
     addToCart(cartItem);
 

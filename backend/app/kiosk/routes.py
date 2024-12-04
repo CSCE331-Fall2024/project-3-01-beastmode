@@ -395,19 +395,16 @@ def create_order():
         return jsonify({'error': 'Invalid order data'}), 400
 
     try:
-        # Start a transaction
         with db.session.begin_nested():
-            # Create the Order
             order = Order(
                 order_date_time=datetime.now(),
                 total_price=total_price,
                 employee_id=None,
-                is_ready= False
+                is_ready=False
             )
             db.session.add(order)
-            db.session.flush()  # To get the order_id
+            db.session.flush()
 
-            # For each cart item, create OrderMenuItem and OrderMenuItemProduct
             for cart_item in cart_items:
                 name = cart_item.get('name')
                 quantity = cart_item.get('quantity', 1)
@@ -431,53 +428,49 @@ def create_order():
                         subtotal_price=subtotal_price / quantity
                     )
                     db.session.add(order_menu_item)
-                    db.session.flush()  # To get the order_menu_item_id
+                    db.session.flush()
 
-                    # Add OrderMenuItemProduct entries for sides and entrees
-                    # Sides
-                    for side in components.get('sides', []):
-                        product_id = side.get('product_id')
-                        if not product_id:
-                            return jsonify({'error': 'Product ID missing in side item'}), 400
-                        # Verify that the product exists
-                        product = ProductItem.query.get(product_id)
-                        if not product:
-                            return jsonify({'error': f'Product with ID {product_id} not found'}), 400
-                        # Create OrderMenuItemProduct
-                        order_menu_item_product = OrderMenuItemProduct(
-                            order_menu_item_id=order_menu_item.order_menu_item_id,
-                            product_id=product_id
-                        )
-                        db.session.add(order_menu_item_product)
-                    # Entrees
-                    for entree in components.get('entrees', []):
-                        product_id = entree.get('product_id')
-                        if not product_id:
-                            return jsonify({'error': 'Product ID missing in entree item'}), 400
-                        # Verify that the product exists
-                        product = ProductItem.query.get(product_id)
-                        if not product:
-                            return jsonify({'error': f'Product with ID {product_id} not found'}), 400
-                        # Create OrderMenuItemProduct
-                        order_menu_item_product = OrderMenuItemProduct(
-                            order_menu_item_id=order_menu_item.order_menu_item_id,
-                            product_id=product_id
-                        )
-                        db.session.add(order_menu_item_product)
+                    # If the item has components, add them
+                    if components:
+                        # Sides
+                        for side in components.get('sides', []):
+                            product_id = side.get('product_id')
+                            if not product_id:
+                                return jsonify({'error': 'Product ID missing in side item'}), 400
+                            product = ProductItem.query.get(product_id)
+                            if not product:
+                                return jsonify({'error': f'Product with ID {product_id} not found'}), 400
+                            order_menu_item_product = OrderMenuItemProduct(
+                                order_menu_item_id=order_menu_item.order_menu_item_id,
+                                product_id=product_id
+                            )
+                            db.session.add(order_menu_item_product)
+                        # Entrees
+                        for entree in components.get('entrees', []):
+                            product_id = entree.get('product_id')
+                            if not product_id:
+                                return jsonify({'error': 'Product ID missing in entree item'}), 400
+                            product = ProductItem.query.get(product_id)
+                            if not product:
+                                return jsonify({'error': f'Product with ID {product_id} not found'}), 400
+                            order_menu_item_product = OrderMenuItemProduct(
+                                order_menu_item_id=order_menu_item.order_menu_item_id,
+                                product_id=product_id
+                            )
+                            db.session.add(order_menu_item_product)
+                    else:
+                        # For items without components (e.g., drinks, appetizers), link the product directly
+                        product_id = cart_item.get('product_id') or cart_item.get('productId')
+                        if product_id:
+                            product = ProductItem.query.get(product_id)
+                            if not product:
+                                return jsonify({'error': f'Product with ID {product_id} not found'}), 400
+                            order_menu_item_product = OrderMenuItemProduct(
+                                order_menu_item_id=order_menu_item.order_menu_item_id,
+                                product_id=product_id
+                            )
+                            db.session.add(order_menu_item_product)
 
-                # Handle simple items (e.g., drinks, appetizers)
-                if not components:
-                    # Create OrderMenuItem entries based on quantity
-                    for _ in range(quantity):
-                        order_menu_item = OrderMenuItem(
-                            order_id=order.order_id,
-                            menu_item_id=menu_item.menu_item_id,
-                            subtotal_price=subtotal_price / quantity
-                        )
-                        db.session.add(order_menu_item)
-                        db.session.flush()
-
-            # Commit the transaction
             db.session.commit()
         return jsonify({'message': 'Order created successfully', 'order_id': order.order_id}), 201
     except Exception as e:
