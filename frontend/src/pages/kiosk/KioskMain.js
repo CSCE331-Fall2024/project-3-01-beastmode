@@ -55,7 +55,10 @@ function KioskMain() {
     } 
     else if (formattedName === "appetizers-&-more") {
       navigate(`/kiosk/order/appetizers-&-more`);
-    } 
+    }
+    else if (formattedName === "a-la-carte") {
+      navigate(`/kiosk/order/a-la-carte`);
+    }
     else {
       navigate(`/kiosk/order/${formattedName}`, {
         state: { 
@@ -70,6 +73,7 @@ function KioskMain() {
       });
     }
   };
+  
 
   if (loading) {
     return <div>Loading...</div>;
