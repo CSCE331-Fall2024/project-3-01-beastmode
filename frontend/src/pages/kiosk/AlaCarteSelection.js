@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import '../../styles/kiosk.css';
 import MenuItemCard from './components/MenuItemCard';
 import InfoCard from './components/InfoCard';
-import SizeSelectionDialog from './components/SizeSelectionDialog'; // Import the SizeSelectionDialog component
+import SizeSelectionDialog from './components/SizeSelectionDialog'; 
 import api from '../../services/api';
 import { CartContext } from './components/CartContext';
 import { NavBar } from "./components/NavBar";

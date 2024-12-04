@@ -51,11 +51,11 @@ function KioskMain() {
     console.log(formattedName);
   
     if (formattedName === "drink") {
-      navigate(`/kiosk/order/drinks`);
+      navigate(`/kiosk/order/drink`); // Changed 'drinks' to 'drink'
     } 
     else if (formattedName === "appetizers-&-more") {
       navigate(`/kiosk/order/appetizers-&-more`);
-    }
+    } 
     else if (formattedName === "a-la-carte") {
       navigate(`/kiosk/order/a-la-carte`);
     }
