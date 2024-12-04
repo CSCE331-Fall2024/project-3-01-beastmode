@@ -126,7 +126,7 @@ const AppsAndMoreSelection = () => {
       size: size, // Include size information
       basePrice: size.menu_item_base_price,
       premiumMultiplier: size.premium_multiplier,
-      menuItemName: size.item_name,
+      name: size.item_name,
     };
 
     addToCart(cartItem);
