@@ -15,6 +15,8 @@ import KioskOrderLayout from './pages/kiosk/KioskOrderLayout';
 //Customer Context API
 import { AccountProvider } from './pages/auth/components/AccountContext';
 
+import MarkdownRenderer from "./components/MarkdownRenderer";
+
 function App() {
   /* Reload the page when kiosk is clicked, so that google translate element will initialize*/
   /*Reset default language to English */
@@ -85,6 +87,9 @@ function App() {
             <Route path="/auth/signin/error" element={<SignInError />}></Route>
             <Route path="/auth/signin/QR" element={<SignInQR />}></Route>
             <Route path="/auth/error" element={<AuthError />}></Route>
+
+            {/* <Route path="/markdown" element={<MarkdownRenderer filePath="/docs/menuCarousel.md" />} /> */}
+
           </Routes>
         </Router>
       </CartProvider>

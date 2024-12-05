@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "date-fns-tz": "^3.2.0",
+    "react-bootstrap": "^2.10.6",
+    "react-chartjs-2": "^5.2.0",
     "react-markdown": "^9.0.1",
     "react-router-dom": "^6.27.0"
   }
