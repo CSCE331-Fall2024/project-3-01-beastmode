@@ -1,4 +1,6 @@
-
+.text-white {
+    color: white;
+  }
 .cover {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://scontent.fftw1-1.fna.fbcdn.net/v/t39.30808-6/269868483_10159808884248814_9043853655181082426_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=KIdRDM1JMiAQ7kNvgGyACY7&_nc_zt=23&_nc_ht=scontent.fftw1-1.fna&_nc_gid=AF7TZNbu9Wqdq3YId2QB-9P&oh=00_AYCJAgN94MeHURFr2qlwF7Tyr4xnPdwEFxvEdA240S1gdw&oe=67274CB0');
     background-size: cover;

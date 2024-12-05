@@ -148,7 +148,7 @@ const AlaCarteSelection = () => {
   return (
     <div className="kiosk-landing-order container-fluid">
       <NavBar />
-      <h2 className="mt-4">Sides</h2>
+      <h2 className="mt-4 text-white">Sides</h2>
       <div className="row pt-4 px-3 justify-content-center">
         {sides.map((side, index) => (
           <div className="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4" key={`side-${index}`}>
@@ -166,7 +166,7 @@ const AlaCarteSelection = () => {
           </div>
         ))}
       </div>
-      <h2 className="mt-4">Entrees</h2>
+      <h2 className="mt-4 text-white">Entrees</h2>
       <div className="row pt-4 px-3 justify-content-center">
         {entrees.map((entree, index) => (
           <div className="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4" key={`entree-${index}`}>

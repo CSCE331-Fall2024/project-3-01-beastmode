@@ -1,35 +1,68 @@
 /* sizeSelectionDialog.css */
 
+/* Overlay */
 .size-selection-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: rgba(0, 0, 0, 0); /* Start transparent */
+  z-index: 1050;
+  opacity: 0;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
+.size-selection-overlay.fade-in {
+  background-color: rgba(0, 0, 0, 0.5); 
+  opacity: 1;
+}
+
+.size-selection-overlay.fade-out {
+  background-color: rgba(0, 0, 0, 0); 
+  opacity: 0;
+}
+
+/* Dialog */
 .size-selection-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   text-align: center;
+  width: 90%;
+  max-width: 500px;
+  z-index: 1051;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+.size-selection-dialog.open {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* Header */
 .size-selection-dialog h2 {
   margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #a3080c; /* Match the cart header color */
 }
 
+/* Item Image */
 .item-image {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
 }
 
+/* Size Options */
 .size-options {
   display: flex;
   flex-direction: column;
@@ -37,13 +70,52 @@
 }
 
 .size-option-button {
-  margin: 10px;
-  padding: 15px 30px;
-  font-size: 18px;
+  width: 100%;
+  max-width: 300px;
+  margin: 10px 0;
+  padding: 12px;
+  font-size: 1.1rem;
+  color: #fff;
+  background-color: #a3080c;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.size-option-button:hover {
+  background-color: #8b070a;
+}
+
+/* Cancel Button */
+.cancel-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #ff6f61;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.cancel-button {
-  margin-top: 20px;
-  padding: 10px 20px;
+.cancel-button:hover {
+  background-color: #e55a4e;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .size-selection-dialog {
+    width: 95%;
+  }
+
+  .size-option-button {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .cancel-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
 }
