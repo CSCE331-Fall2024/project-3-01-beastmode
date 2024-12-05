@@ -31,14 +31,25 @@ function KitchenMain() {
 
   // Calculate elapsed time and set up interval
   useEffect(() => {
-    fetchOrders(); // Initial fetch
-
-    const interval = setInterval(() => {
-      fetchOrders(); // Fetch orders every 5 seconds
+    // Fetch orders on mount
+    fetchOrders();
+  
+    // Polling interval for fetching orders
+    const fetchInterval = setInterval(() => {
+      fetchOrders();
     }, 5000);
-
-    return () => clearInterval(interval);
+  
+    // Interval for updating elapsed time every second
+    const timeInterval = setInterval(() => {
+      setOrders(prevOrders => [...prevOrders]); // Trigger re-render
+    }, 1000);
+  
+    return () => {
+      clearInterval(fetchInterval);
+      clearInterval(timeInterval);
+    };
   }, []);
+  
 
   // Function to calculate elapsed time in minutes
   const calculateElapsedTime = (orderTime) => {
@@ -56,25 +67,25 @@ function KitchenMain() {
     };
   };
 
-  // Function to get color based on elapsed time
-  const getOrderCardColor = (totalElapsedSeconds) => {
-    // Define thresholds in seconds
-    const maxTime = 600; // 30 minutes
-    const minTime = 0;
-  
-    // Clamp the elapsed time between minTime and maxTime
-    const clampedTime = Math.min(Math.max(totalElapsedSeconds, minTime), maxTime);
-  
-    // Calculate the percentage
-    const percentage = (clampedTime - minTime) / (maxTime - minTime);
-  
-    // Interpolate between green and red
-    const red = 255; // Always bright red for the darkest color
-    const green = Math.floor((1 - percentage) * 255); // Reduce green as percentage increases
-    const blue = 0;
-  
-    return `rgb(${red}, ${green}, ${blue})`;
-  };
+
+const getOrderCardColor = (totalElapsedSeconds) => {
+  // Define thresholds in seconds
+  const maxTime = 600; // 10 minutes
+  const minTime = 0;
+
+  // Clamp the elapsed time between minTime and maxTime
+  const clampedTime = Math.min(Math.max(totalElapsedSeconds, minTime), maxTime);
+
+  // Calculate the percentage
+  const percentage = (clampedTime - minTime) / (maxTime - minTime);
+
+  // Interpolate between green and red
+  const red = Math.floor(percentage * 255); // Increases from 0 to 255
+  const green = Math.floor((1 - percentage) * 255); // Decreases from 255 to 0
+  const blue = 0; // Always 0 for red-green gradient
+
+  return `rgb(${red}, ${green}, ${blue})`;
+};
 
   // Function to mark an order as ready
   const markOrderReady = async (orderId) => {
