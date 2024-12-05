@@ -34,13 +34,13 @@
 /* Order Card */
 .order-card {
   background-color: rgba(255, 255, 255, 0.95);
-  border: none;
+  border: 4px solid; /* Adjusted to make border more prominent */
   border-radius: 8px;
   width: 300px;
   padding: 15px;
   position: relative;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s;
+  transition: transform 0.2s, border-color 0.5s;
 }
 
 .order-card:hover {
