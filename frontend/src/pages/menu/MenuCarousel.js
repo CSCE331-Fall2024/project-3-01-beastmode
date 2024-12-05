@@ -8,7 +8,7 @@ import MenuMain1 from "./MenuPage1";
 import MenuMain2 from "./MenuPage2";
 import MenuMain3 from "./MenuPage3";
 
-// Carousel Functionality for Menu Board
+
 const MenuCarousel = () => {
 
   // Play/Pause State
