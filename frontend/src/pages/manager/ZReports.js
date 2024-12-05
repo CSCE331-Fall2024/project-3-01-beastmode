@@ -10,13 +10,13 @@ function ZReports() {
   const colors=["#77070a","#a3080c","rgb(98, 98, 98)","gray","rgb(163, 163, 163)"];
 
   const fetchZReport = async () => {
-    const response = await api.get('/manager/xzreports',{timeout: 60000}); 
-    setZReportsData(response.data);
     await api.post('/manager/xzreports', "Z", {timeout: 60000,
       headers: {
         'Content-Type': 'text/plain'
       }
     });
+    const response = await api.get('/manager/xzreports',{timeout: 60000}); 
+    setZReportsData(response.data);
   };
 
   useEffect(() => {
