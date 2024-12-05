@@ -41,42 +41,60 @@ const AlaCarteSelection = () => {
     fetchItems();
   }, []);
 
-  const sizeOptionsSides = [
-    {
-      item_name: 'aLaCarteSideMedium',
-      display_name: 'Medium',
-      menu_item_base_price: 4.40,
-      premium_multiplier: 1,
-    },
-    {
-      item_name: 'aLaCarteSideLarge',
-      display_name: 'Large',
-      menu_item_base_price: 5.40,
-      premium_multiplier: 1,
-    },
-  ];
-
-  const sizeOptionsEntrees = [
-    {
-      item_name: 'aLaCarteEntreeSmall',
-      display_name: 'Small',
-      menu_item_base_price: 5.20,
-      premium_multiplier: 1,
-    },
-    {
-      item_name: 'aLaCarteEntreeMedium',
-      display_name: 'Medium',
-      menu_item_base_price: 8.50,
-      premium_multiplier: 2,
-    },
-    {
-      item_name: 'aLaCarteEntreeLarge',
-      display_name: 'Large',
-      menu_item_base_price: 11.20,
-      premium_multiplier: 3,
-    },
-  ];
-
+  const getSizeOptions = (itemType, selectedItem) => {
+    let sizeOptions = [];
+    if (itemType === 'side') {
+      sizeOptions = [
+        {
+          item_name: 'aLaCarteSideMedium',
+          display_name: 'Medium',
+          menu_item_base_price: 4.40,
+          premium_multiplier: 1,
+        },
+        {
+          item_name: 'aLaCarteSideLarge',
+          display_name: 'Large',
+          menu_item_base_price: 5.40,
+          premium_multiplier: 1,
+        },
+      ];
+    } else if (itemType === 'entree') {
+      sizeOptions = [
+        {
+          item_name: 'aLaCarteEntreeSmall',
+          display_name: 'Small',
+          menu_item_base_price: 5.20,
+          premium_multiplier: 1,
+        },
+        {
+          item_name: 'aLaCarteEntreeMedium',
+          display_name: 'Medium',
+          menu_item_base_price: 8.50,
+          premium_multiplier: 2,
+        },
+        {
+          item_name: 'aLaCarteEntreeLarge',
+          display_name: 'Large',
+          menu_item_base_price: 11.20,
+          premium_multiplier: 3,
+        },
+      ];
+    }
+  
+    // Calculate total price for each size option
+    const calculatedSizeOptions = sizeOptions.map((sizeOption) => {
+      let totalPrice = sizeOption.menu_item_base_price;
+      if (selectedItem.is_premium) {
+        totalPrice += sizeOption.premium_multiplier * selectedItem.premium_addition;
+      }
+      return {
+        ...sizeOption,
+        total_price: totalPrice,
+      };
+    });
+  
+    return calculatedSizeOptions;
+  };
   const handleItemSelect = (item, type) => {
     console.log('Selected item:', item);
     setSelectedItem(item);
@@ -109,8 +127,7 @@ const AlaCarteSelection = () => {
       size: size, // Include size information
       basePrice: size.menu_item_base_price,
       premiumMultiplier: size.premium_multiplier,
-      menuItemName: size.item_name,
-      name: 'aLaCarte', // Set the menu item name
+      name: size.item_name,
       is_premium: selectedItem.is_premium,
       premium_addition: selectedItem.premium_addition,
     };
@@ -200,10 +217,11 @@ const AlaCarteSelection = () => {
         />
       )}
 
+
       {showSizeDialog && (
         <SizeSelectionDialog
           item={selectedItem}
-          sizeOptions={selectedItemType === 'side' ? sizeOptionsSides : sizeOptionsEntrees}
+          sizeOptions={getSizeOptions(selectedItemType, selectedItem)}
           onSizeSelect={handleSizeSelect}
           onClose={handleSizeDialogClose}
         />

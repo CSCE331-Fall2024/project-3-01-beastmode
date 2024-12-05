@@ -38,7 +38,7 @@ const SizeSelectionDialog = ({ item, sizeOptions, onSizeSelect, onClose }) => {
               className="size-option-button"
               onClick={() => onSizeSelect(sizeOption)}
             >
-              {sizeOption.display_name} (${sizeOption.menu_item_base_price.toFixed(2)})
+              {sizeOption.display_name} (${sizeOption.total_price.toFixed(2)})
             </button>
           ))}
         </div>

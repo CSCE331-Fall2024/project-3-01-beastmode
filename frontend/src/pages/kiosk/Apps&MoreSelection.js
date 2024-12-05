@@ -1,10 +1,11 @@
+// AppsAndMoreSelection.js
 import React, { useState, useEffect, useContext } from 'react';
 import '../../styles/kiosk.css';
 import MenuItemCard from './components/MenuItemCard';
 import InfoCard from './components/InfoCard';
-import SizeSelectionDialog from './components/SizeSelectionDialog'; // Import SizeSelectionDialog
+import SizeSelectionDialog from './components/SizeSelectionDialog';
 import api from '../../services/api';
-import { CartContext } from './components/CartContext'; // Import CartContext
+import { CartContext } from './components/CartContext';
 import { NavBar } from "./components/NavBar";
 
 const formatProductName = (name) => {
@@ -21,45 +22,9 @@ const AppsAndMoreSelection = () => {
   // State variables for size selection
   const [showSizeDialog, setShowSizeDialog] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItemType, setSelectedItemType] = useState(null);
 
-  const { cartItems, setCartItems } = useContext(CartContext); // Access cart context
-
-  // Define size options for appetizers and desserts
-  const appetizerSizeOptions = [
-    {
-      item_name: 'appetizerSmall',
-      display_name: 'Small',
-      menu_item_base_price: 2.00,
-      premium_multiplier: 1,
-    },
-    {
-      item_name: 'appetizerLarge',
-      display_name: 'Large',
-      menu_item_base_price: 8.00,
-      premium_multiplier: 1,
-    },
-  ];
-
-  const dessertSizeOptions = [
-    {
-      item_name: 'dessertSmall',
-      display_name: 'Small',
-      menu_item_base_price: 2.00,
-      premium_multiplier: 1,
-    },
-    {
-      item_name: 'dessertMedium',
-      display_name: 'Medium',
-      menu_item_base_price: 6.20,
-      premium_multiplier: 1,
-    },
-    {
-      item_name: 'dessertLarge',
-      display_name: 'Large',
-      menu_item_base_price: 8.00,
-      premium_multiplier: 1,
-    },
-  ];
+  const { cartItems, setCartItems } = useContext(CartContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,25 +45,66 @@ const AppsAndMoreSelection = () => {
     fetchData();
   }, []);
 
+  const getSizeOptions = (itemType, selectedItem) => {
+    let sizeOptions = [];
+    if (itemType === 'appetizer') {
+      sizeOptions = [
+        {
+          item_name: 'appetizerSmall',
+          display_name: 'Small',
+          menu_item_base_price: 2.00,
+          premium_multiplier: 1,
+        },
+        {
+          item_name: 'appetizerLarge',
+          display_name: 'Large',
+          menu_item_base_price: 8.00,
+          premium_multiplier: 1,
+        },
+      ];
+    } else if (itemType === 'dessert') {
+      sizeOptions = [
+        {
+          item_name: 'dessertSmall',
+          display_name: 'Small',
+          menu_item_base_price: 2.00,
+          premium_multiplier: 1,
+        },
+        {
+          item_name: 'dessertMedium',
+          display_name: 'Medium',
+          menu_item_base_price: 6.20,
+          premium_multiplier: 1,
+        },
+        {
+          item_name: 'dessertLarge',
+          display_name: 'Large',
+          menu_item_base_price: 8.00,
+          premium_multiplier: 1,
+        },
+      ];
+    }
+
+    // Calculate total price for each size option
+    const calculatedSizeOptions = sizeOptions.map((sizeOption) => {
+      let totalPrice = sizeOption.menu_item_base_price;
+      if (selectedItem.is_premium) {
+        totalPrice += sizeOption.premium_multiplier * selectedItem.premium_addition;
+      }
+      return {
+        ...sizeOption,
+        total_price: totalPrice,
+      };
+    });
+
+    return calculatedSizeOptions;
+  };
+
   const handleItemSelect = (item, type) => {
     console.log('Selected item:', item);
-
-    // Determine size options based on item type
-    let sizeOptions = [];
-    if (type === 'appetizer') {
-      sizeOptions = appetizerSizeOptions;
-    } else if (type === 'dessert') {
-      sizeOptions = dessertSizeOptions;
-    }
-
-    // If there are size options, show size selection dialog
-    if (sizeOptions.length > 0) {
-      setSelectedItem({ item, sizeOptions });
-      setShowSizeDialog(true);
-    } else {
-      // If no size options, add directly to cart
-      addToCart(item);
-    }
+    setSelectedItem(item);
+    setSelectedItemType(type);
+    setShowSizeDialog(true);
   };
 
   const addToCart = (item) => {
@@ -120,13 +126,16 @@ const AppsAndMoreSelection = () => {
   };
 
   const handleSizeSelect = (size) => {
-    const { item } = selectedItem;
+    // Create a cart item with the selected size
     const cartItem = {
-      ...item,
+      ...selectedItem,
       size: size, // Include size information
       basePrice: size.menu_item_base_price,
       premiumMultiplier: size.premium_multiplier,
-      name: size.item_name,
+      menuItemName: size.item_name,
+      name: size.item_name, // Set the menu item name
+      is_premium: selectedItem.is_premium,
+      premium_addition: selectedItem.premium_addition,
     };
 
     addToCart(cartItem);
@@ -134,11 +143,13 @@ const AppsAndMoreSelection = () => {
     // Close size selection dialog
     setShowSizeDialog(false);
     setSelectedItem(null);
+    setSelectedItemType(null);
   };
 
   const handleSizeDialogClose = () => {
     setShowSizeDialog(false);
     setSelectedItem(null);
+    setSelectedItemType(null);
   };
 
   const handleInfoClick = (item) => {
@@ -218,8 +229,8 @@ const AppsAndMoreSelection = () => {
       {/* Size Selection Dialog */}
       {showSizeDialog && (
         <SizeSelectionDialog
-          item={selectedItem.item}
-          sizeOptions={selectedItem.sizeOptions}
+          item={selectedItem}
+          sizeOptions={getSizeOptions(selectedItemType, selectedItem)}
           onSizeSelect={handleSizeSelect}
           onClose={handleSizeDialogClose}
         />

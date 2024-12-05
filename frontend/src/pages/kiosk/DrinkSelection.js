@@ -37,27 +37,42 @@ const DrinkSelection = () => {
     fetchDrinks();
   }, []);
 
-  const sizeOptions = [
-    {
-      item_name: 'drinkSmall',
-      display_name: 'Small',
-      menu_item_base_price: 2.10,
-      premium_multiplier: 1,
-    },
-    {
-      item_name: 'drinkMedium',
-      display_name: 'Medium',
-      menu_item_base_price: 2.30,
-      premium_multiplier: 1,
-    },
-    {
-      item_name: 'drinkLarge',
-      display_name: 'Large',
-      menu_item_base_price: 2.50,
-      premium_multiplier: 1,
-    },
-  ];
+  const getSizeOptions = (selectedDrink) => {
+    const baseSizeOptions = [
+      {
+        item_name: 'drinkSmall',
+        display_name: 'Small',
+        menu_item_base_price: 2.10,
+        premium_multiplier: 1,
+      },
+      {
+        item_name: 'drinkMedium',
+        display_name: 'Medium',
+        menu_item_base_price: 2.30,
+        premium_multiplier: 1,
+      },
+      {
+        item_name: 'drinkLarge',
+        display_name: 'Large',
+        menu_item_base_price: 2.50,
+        premium_multiplier: 1,
+      },
+    ];
 
+    // Calculate total price for each size option
+    const calculatedSizeOptions = baseSizeOptions.map((sizeOption) => {
+      let totalPrice = sizeOption.menu_item_base_price;
+      if (selectedDrink.is_premium) {
+        totalPrice += sizeOption.premium_multiplier * selectedDrink.premium_addition;
+      }
+      return {
+        ...sizeOption,
+        total_price: totalPrice,
+      };
+    });
+
+    return calculatedSizeOptions;
+  };
   const handleDrinkSelect = (drink) => {
     console.log('Selected drink:', drink);
 
@@ -181,8 +196,8 @@ const DrinkSelection = () => {
 
       {showSizeDialog && (
         <SizeSelectionDialog
-          item={selectedDrink} // Changed from 'drink' to 'item'
-          sizeOptions={sizeOptions}
+          item={selectedDrink}
+          sizeOptions={getSizeOptions(selectedDrink)}
           onSizeSelect={handleSizeSelect}
           onClose={handleSizeDialogClose}
         />
