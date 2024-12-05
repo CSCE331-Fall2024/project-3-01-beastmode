@@ -6,6 +6,10 @@ function KitchenMain() {
   const [orders, setOrders] = useState([]); // State to hold orders
   const isFetchingRef = useRef(false);
 
+  // State variables for delete confirmation modal
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+
   // Fetch pending orders from /kitchen/orders
   const fetchOrders = async () => {
     if (isFetchingRef.current) return; // Prevent overlapping fetches
@@ -68,24 +72,24 @@ function KitchenMain() {
   };
 
 
-const getOrderCardColor = (totalElapsedSeconds) => {
-  // Define thresholds in seconds
-  const maxTime = 600; // 10 minutes
-  const minTime = 0;
+  const getOrderCardColor = (totalElapsedSeconds) => {
+    // Define thresholds in seconds
+    const maxTime = 600; // 10 minutes
+    const minTime = 0;
 
-  // Clamp the elapsed time between minTime and maxTime
-  const clampedTime = Math.min(Math.max(totalElapsedSeconds, minTime), maxTime);
+    // Clamp the elapsed time between minTime and maxTime
+    const clampedTime = Math.min(Math.max(totalElapsedSeconds, minTime), maxTime);
 
-  // Calculate the percentage
-  const percentage = (clampedTime - minTime) / (maxTime - minTime);
+    // Calculate the percentage
+    const percentage = (clampedTime - minTime) / (maxTime - minTime);
 
-  // Interpolate between green and red
-  const red = Math.floor(percentage * 255); // Increases from 0 to 255
-  const green = Math.floor((1 - percentage) * 255); // Decreases from 255 to 0
-  const blue = 0; // Always 0 for red-green gradient
+    // Interpolate between green and red
+    const red = Math.floor(percentage * 255); // Increases from 0 to 255
+    const green = Math.floor((1 - percentage) * 255); // Decreases from 255 to 0
+    const blue = 0; // Always 0 for red-green gradient
 
-  return `rgb(${red}, ${green}, ${blue})`;
-};
+    return `rgb(${red}, ${green}, ${blue})`;
+  };
 
   // Function to mark an order as ready
   const markOrderReady = async (orderId) => {
@@ -100,6 +104,34 @@ const getOrderCardColor = (totalElapsedSeconds) => {
     } catch (error) {
       console.error("Error marking order as ready:", error);
     }
+  };
+
+  // Function to handle delete button click
+  const handleDeleteClick = (orderId) => {
+    setSelectedOrderId(orderId);
+    setShowDeleteModal(true);
+  };
+
+  // Function to confirm deletion
+  const handleConfirmDelete = async () => {
+    try {
+      const response = await api.delete(`/kitchen/orders/${selectedOrderId}`);
+      if (response.status === 200) {
+        // Remove the order from the state
+        setOrders(prevOrders => prevOrders.filter(order => order.order_id !== selectedOrderId));
+        setShowDeleteModal(false);
+        setSelectedOrderId(null);
+      }
+    } catch (error) {
+      console.error("Error deleting order:", error);
+      // Optionally, show an error message to the user
+    }
+  };
+
+  // Function to cancel deletion
+  const handleCancelDelete = () => {
+    setShowDeleteModal(false);
+    setSelectedOrderId(null);
   };
 
   return (
@@ -131,10 +163,27 @@ const getOrderCardColor = (totalElapsedSeconds) => {
                     </div>
                   ))}
                 </div>
-                <button className="mark-ready-button" onClick={() => markOrderReady(order.order_id)}>Mark as Ready</button>
+                <div className="order-buttons">
+                  <button className="mark-ready-button" onClick={() => markOrderReady(order.order_id)}>Mark as Ready</button>
+                  <button className="delete-order-button" onClick={() => handleDeleteClick(order.order_id)}>Delete Order</button>
+                </div>
               </div>
             );
           })}
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Confirm Delete</h3>
+            <p>Are you sure you want to delete order #{selectedOrderId}? This action cannot be undone.</p>
+            <div className="modal-buttons">
+              <button className="confirm-delete-button" onClick={handleConfirmDelete}>Delete</button>
+              <button className="cancel-delete-button" onClick={handleCancelDelete}>Cancel</button>
+            </div>
+          </div>
         </div>
       )}
     </div>

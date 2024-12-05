@@ -78,23 +78,49 @@
   color: #555;
 }
 
+/* Order Buttons */
+.order-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
 /* Mark as Ready Button */
 .mark-ready-button {
-  background-color: #a3080c; /* Primary color from kiosk.css */
+  background-color: #28a745; /* Green color for 'Mark as Ready' */
   color: white;
   border: none;
   padding: 10px;
-  width: 100%;
+  width: 48%;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   transition: transform 0.2s, background-color 0.3s;
 }
 
 .mark-ready-button:hover {
   transform: scale(1.05);
-  background-color: #7d0609;
+  background-color: #218838;
+}
+
+/* Delete Order Button */
+.delete-order-button {
+  background-color: #dc3545; /* Red color for 'Delete Order' */
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 48%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.delete-order-button:hover {
+  transform: scale(1.05);
+  background-color: #c82333;
 }
 
 /* No Pending Orders Message */
@@ -104,11 +130,82 @@
   margin-top: 50px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .order-card {
-      width: 90%;
-  }
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.modal-content h3 {
+  margin-bottom: 15px;
+  color: #a3080c;
+}
+
+.modal-content p {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+/* Confirm Delete Button */
+.confirm-delete-button {
+  background-color: #dc3545; /* Red color for 'Delete' action */
+  color: #fff;
+  padding: 10px 20px;
+  width: 40%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.confirm-delete-button:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+/* Cancel Delete Button */
+.cancel-delete-button {
+  background-color: #6c757d; /* Grey color for 'Cancel' action */
+  color: #fff;
+  padding: 10px 20px;
+  width: 40%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.cancel-delete-button:hover {
+  background-color: #5a6268;
+  transform: scale(1.05);
 }
 
 /* Optional: Info Button (if needed) */
@@ -170,5 +267,36 @@
 @media (min-width: 768px) {
   .kitchen-container {
       padding-top: 90px;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .order-card {
+      width: 90%;
+  }
+
+  .order-buttons {
+    flex-direction: column;
+  }
+
+  .mark-ready-button,
+  .delete-order-button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+  }
+
+  .confirm-delete-button,
+  .cancel-delete-button {
+    width: 100%;
+    margin-bottom: 10px;
   }
 }
