@@ -106,7 +106,13 @@ def mark_order_ready(order_id):
 
         order.is_ready = True
         db.session.commit()
-        return jsonify({'message': 'Order marked as ready.'}), 200
+        # Fetch the updated order to confirm it's marked as ready
+        updated_order = Order.query.get(order_id)
+        if updated_order.is_ready:
+            return jsonify({'message': 'Order marked as ready.'}), 200
+        else:
+            return jsonify({'error': 'Failed to mark order as ready.'}), 500
     except Exception as e:
         print('Error marking order as ready:', e)
+        db.session.rollback()
         return jsonify({'error': 'An error occurred while updating the order.'}), 500

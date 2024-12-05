@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import api from '../../services/api'; // Axios instance with base URL
 import '../../styles/kitchen.css'; // Create and import CSS for styling
 
-
 function KitchenMain() {
   const [orders, setOrders] = useState([]); // State to hold orders
 
@@ -17,6 +16,13 @@ function KitchenMain() {
     }
   };
   
+  // Format the item names
+  const formatName = (name) => { 
+    return name
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/^./, str => str.toUpperCase())
+      .trim();
+  };
 
   // Fetch orders on component mount and set up polling
   useEffect(() => {
@@ -36,7 +42,9 @@ function KitchenMain() {
       const response = await api.post(`/kitchen/orders/${orderId}/ready`);
       if (response.status === 200) {
         // Remove the order from the state
-        setOrders(orders.filter(order => order.order_id !== orderId));
+        setOrders(prevOrders => prevOrders.filter(order => order.order_id !== orderId));
+        // Immediately fetch the latest orders
+        fetchOrders();
       }
     } catch (error) {
       console.error("Error marking order as ready:", error);
@@ -47,7 +55,7 @@ function KitchenMain() {
     <div className="kitchen-container">
       <h1>Kitchen View</h1>
       {orders.length === 0 ? (
-        <p>No pending orders.</p>
+        <p className="no-orders">No pending orders.</p>
       ) : (
         <div className="orders-container">
           {orders.map(order => (
@@ -57,10 +65,12 @@ function KitchenMain() {
               <div className="order-items">
                 {order.order_menu_items.map(omi => (
                   <div key={omi.order_menu_item_id} className="order-item">
-                    <h4>{omi.menu_item_name}</h4>
+                    <h4>{formatName(omi.menu_item_name)}</h4>
                     <div className="components">
                       {omi.components.map((comp, index) => (
-                        <p key={index}>{comp.type}: {comp.product_name}</p>
+                        <p key={index}>
+                          <strong>{formatName(comp.type)}:</strong> {formatName(comp.product_name)}
+                        </p>
                       ))}
                     </div>
                   </div>
